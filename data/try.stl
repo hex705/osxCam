@@ -1,0 +1,17 @@
+(file created with xCam)
+    N0  
+    N1  (this is the begining of the file)
+    N2  G21 (metric)
+    N3  G40 (cancel cutter comp)
+    N4  G00 z10.00
+    N5  (Move to start location)
+    N6  G00 Z2.0
+    N7      X20.0  Y50.0
+    N8  F200.0
+    N9  Z1.99
+    N10  G01 70.0  50.0
+    N11  secondLine
+    N12  third
+    N13  forth
+    N14  G00 z30.00
+    N15  M2
