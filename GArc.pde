@@ -196,7 +196,7 @@ class GArc extends Entity {
  }  // end getTargets
 
 
-  String[] getNC(int steps, int pathType) {  // RAW or GOOFY
+  String[] getNC(int steps, float depthPerStep, int pathType) {  // RAW or GOOFY
   
     
 
@@ -208,7 +208,7 @@ class GArc extends Entity {
     int newSize = steps*2;
     gcode = expand ( gcode, newSize );
 
-    float depthPerStep = depth/steps;
+   // float depthPerStep = depth/steps;
     int c = 1;
 
     for (int s=0; s < steps*2; s=s+2) {

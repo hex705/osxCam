@@ -12,7 +12,7 @@ class gCodeEngine {
 
   PVector currentLoc;
   PVector[] gTargets;
-  float gFeed, gDepth, gRapid, gPlungeRate, gTravelFeed, gTravelHeight;
+  float gFeed, gDepth, gRapid, gPlungeRate, gTravelFeed, gTravelHeight, gStepDepth;
   int lineElementIndex;
   int lineNumber, lineCount;
   int lineNumberStep = 5;
@@ -43,9 +43,28 @@ class gCodeEngine {
 
 
   // methods 
+  
+  // fxn accepts the step number
+  // then stores the depth per step locally in : gStepDepth
+  // whichStep is contrller by ncFile
+  
+  void setThisStep ( int whichStep ) {
+       gStepDepth = gDepth/gSteps * whichStep ;
+       println( "gStepDepth " + gStepDepth);
+  }
+  
+  void setGStepDepth ( float gSD ){
+     gStepDepth = gSD; 
+  }
+  
+  
+  float getGStepDepth ( ){
+     return gStepDepth; 
+  }
 
   void setMasterRapid (float r ) {
-    gDepth = r;
+    gRapid = r;
+    println( "gRapid set to " + gRapid);
   }
 
   float getMasterRapid () {
@@ -54,17 +73,17 @@ class gCodeEngine {
 
   void setMasterDepth (float d ) {
 
-    Iterator i = entities.values().iterator();
-
-    while (i.hasNext ()) {
-
-      Entity e = (Entity) i.next();
-      println("setting depth");
-      e.setDepth(d);
-    } // end while iteration;
-
+//    Iterator i = entities.values().iterator();
+//
+//    while (i.hasNext ()) {
+//
+//      Entity e = (Entity) i.next();
+//      println("setting depth");
+//      e.setDepth(d);
+//    } // end while iteration;
 
     gDepth = d;
+    println( "depth set to " + gDepth);
   }
 
   float  getMasterDepth () {
@@ -72,7 +91,17 @@ class gCodeEngine {
   }
 
   void setMasterFeed (float f ) {
+    Iterator i = entities.values().iterator();
+
+    while (i.hasNext ()) {
+
+      Entity e = (Entity) i.next();
+      println("setting depth");
+      e.setDepth(f);
+    } // end while iteration;
+
     gFeed = f;
+    println( "feed set to " + gFeed);
   }
 
   float  getMasterFeed () {
@@ -81,6 +110,7 @@ class gCodeEngine {
 
   void setTravelFeed (float f ) {
     gTravelFeed = f;
+    println( "travel feed set to " + gTravelFeed);
   }
 
   float  getTravelFeed () {
@@ -89,6 +119,7 @@ class gCodeEngine {
 
   void setTravelHeight (float tH ) {
     gTravelHeight = tH;
+    println( "travelHeight set to " + gTravelHeight);
   }
 
   float  getTravelHeight () {
@@ -110,6 +141,7 @@ class gCodeEngine {
 
   void setSteps (int s) {
     gSteps = s;
+    println( "steps set to " + gSteps);
   }
   
   int  getSteps ( ) {
@@ -249,7 +281,9 @@ class gCodeEngine {
 
   void addEntityGCode(Entity e, int pathType) {
 
-    eCode = e.getNC(gSteps, pathType);
+    eCode = e.getNC(1, gStepDepth, pathType);
+    // eCode = e.getNC(gSteps, gStepDepth, pathType);
+    // eCode = e.getNC(gSteps, pathType);
 
     //println("got a string array for element gcode");
     //printArray (eCode, "code from element");
@@ -266,7 +300,7 @@ class gCodeEngine {
 
   void checkStartPosition( Entity e, PVector target) {
 
-    float joinTolerance = 0.01;
+    float joinTolerance = 0.025;
 
     float xDiff = abs(target.x - currentLoc.x);
     float yDiff = abs(target.y - currentLoc.y);

@@ -89,15 +89,15 @@ class GLine extends Entity {
 //  }  // end getTargets
 
 
-  String[] getNC(int steps, int pathTYPE) {  // type is prim or poly
+  String[] getNC(int steps, float depthPerStep, int pathTYPE) {  // type is prim or poly
     
     // i think direction is taken care of if I use targets
     PVector resetTarget = new PVector();
     int newSize = steps*2;
     gcode = expand ( gcode, newSize );
     
-        float depthPerStep = depth/steps;
-        int c= 1;
+        // float depthPerStep = depth/steps;
+        int c = 1;
         
         for (int s=0; s < steps*2; s=s+2) {
          

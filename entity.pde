@@ -1,6 +1,6 @@
 class Entity {
 
-  color renderColor = color(255,0,0);
+  color renderColor = color(255,255,255);
   String[] source;
   String[] gcode;
   float[]  coord;
@@ -174,6 +174,7 @@ class Entity {
   }
 
   float getDepth() {
+    println("%%%%%%%%%%%%%%%%%%%%%%%get my depth ^^^^^^^^^^^^^^^^^^^^");
     return depth;
   } // get
 
@@ -240,7 +241,7 @@ class Entity {
     stroke(255);
   }
 
-  String[] getNC (int i, int j) {
+  String[] getNC (int i, float f, int j) {
     String[] ss = {
       "this is an NC line from PARENT ENTITY", "really"
     };

@@ -175,7 +175,7 @@ public void Master_Feed (int  mF) {
 }
 
 public void Master_Depth (float  d) { 
-  //gEngine.setMasterDepth( d );
+  gEngine.setMasterDepth( d );
 }
 
 

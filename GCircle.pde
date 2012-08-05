@@ -54,7 +54,8 @@ void switchDirection() {
 
 
 
-String[] getNC(int steps, int dir) {  // type is prim or poly
+String[] getNC(int steps, float depthPerStep, int dir) {  // type is prim or poly
+                                      //  now add depth -- change steps to depth
     
     // i think direction is taken care of if I use targets
 
@@ -64,7 +65,7 @@ String[] getNC(int steps, int dir) {  // type is prim or poly
       i = coord[R1];
       j = 0;
     
-        float depthPerStep = depth/steps;
+        //float depthPerStep = depth/steps;
         int c= 1;
         
         for (int s=0; s < steps*2; s=s+2) {

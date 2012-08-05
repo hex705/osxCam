@@ -215,6 +215,11 @@ void drawEntities () {
     
     if (e.isEnabled()) {
        // println("key " + e.getMyKey());
+       //strokeWeight(5);
+       // stroke(200,200,0);
+       // e.display();
+        strokeWeight(1);
+        stroke(255);
         e.display();
     }
   } // end while iteration

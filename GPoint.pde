@@ -43,12 +43,12 @@ class GPoint extends Entity {
       return targets;
   }
   
-  String[] getNC(int steps, int dir ) {  // type is prim or poly
+  String[] getNC(int steps, float depthPerStep, int dir ) {  // type is prim or poly
    
     int newSize = steps*2 + 1;
     gcode = expand ( gcode, newSize );
    
-        float depthPerStep = depth/steps;
+        //float depthPerStep = depth/steps;
         int c= 1;
       
         for (int s=0; s < steps*2; s=s+2 ) { 

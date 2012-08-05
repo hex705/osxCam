@@ -1,5 +1,7 @@
 // linear back plot
 
+// add some comments to the file 
+
 class BPElement {
 
   color plotColor;
